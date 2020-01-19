@@ -20,9 +20,9 @@ def main():
     tg = op.GetTags()
     ls = tg[len(tg)-1].GetBaseSelect()
     tg[len(tg)-1].Remove()
-    lsOn = op.GetPolygonS()
-    lsOn.DeselectAll()   
-    seila = ls.GetClone()
+    ls_on = op.GetPolygonS()
+    ls_on.DeselectAll()   
+    cln = ls.GetClone()
     ls.DeselectAll()
     c4d.EventAdd()
     c4d.CallCommand(13324)
@@ -45,7 +45,7 @@ def main():
     settings[c4d.UVCOMMAND_TRANSFORM_ANGLE] = utils.DegToRad(0)
 	
     for i in xrange(0,op.GetPolygonCount()):
-        if(seila.IsSelected(i)):         
+        if(cln.IsSelected(i)):         
             lsOn.DeselectAll()         
             c4d.CallCommand(13324)
             lsOn.Select(i)
