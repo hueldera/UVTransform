@@ -46,12 +46,12 @@ def main():
 	
     for i in xrange(0,op.GetPolygonCount()):
         if(cln.IsSelected(i)):         
-            lsOn.DeselectAll()         
+            ls_on.DeselectAll()         
             c4d.CallCommand(13324)
-            lsOn.Select(i)
+            ls_on.Select(i)
             bodypaint.CallUVCommand(handle.GetPoints(), handle.GetPointCount(), handle.GetPolys(), handle.GetPolyCount(), uvw,
-                                    lsOn, handle.GetUVPointSel(), op, handle.GetMode(), c4d.UVCOMMAND_TRANSFORM, settings)
-            lsOn.DeselectAll()
+                                    ls_on, handle.GetUVPointSel(), op, handle.GetMode(), c4d.UVCOMMAND_TRANSFORM, settings)
+            ls_on.DeselectAll()
 			
     handle.SetUVWFromTextureView(uvw, True, True, True)    
     bodypaint.FreeActiveUVSet(handle)
