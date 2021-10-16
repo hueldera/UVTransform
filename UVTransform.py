@@ -12,7 +12,7 @@ def main():
     if(op == None):
         c4d.StatusSetText("Error: Select at least one object.")
         return
-		
+
     c4d.StatusSetText("UVTransform: Processing..")
     c4d.StatusSetSpin()
     c4d.CallCommand(12187)
@@ -26,25 +26,25 @@ def main():
     ls.DeselectAll()
     c4d.EventAdd()
     c4d.CallCommand(13324)
-	
+
     handle = bodypaint.GetActiveUVSet(doc, c4d.GETACTIVEUVSET_ALL)
     if(handle == None):
         c4d.StatusSetText("Erro: Object without UV Tag.")
         return
-		
+
     uvw = handle.GetUVW()   
     if(uvw == None):
         c4d.StatusSetText("Error: Object with invalid UV Tag.")
         return
-		
+
     settings = c4d.BaseContainer()
     settings[c4d.UVCOMMAND_TRANSFORM_MOVE_X] = 0
     settings[c4d.UVCOMMAND_TRANSFORM_MOVE_Y] = 0
     settings[c4d.UVCOMMAND_TRANSFORM_SCALE_X] = _SCALE
     settings[c4d.UVCOMMAND_TRANSFORM_SCALE_Y] = _SCALE
     settings[c4d.UVCOMMAND_TRANSFORM_ANGLE] = utils.DegToRad(0)
-	
-    for i in xrange(0,op.GetPolygonCount()):
+
+    for i in range(0,op.GetPolygonCount()):
         if(cln.IsSelected(i)):         
             ls_on.DeselectAll()         
             c4d.CallCommand(13324)
@@ -52,11 +52,11 @@ def main():
             bodypaint.CallUVCommand(handle.GetPoints(), handle.GetPointCount(), handle.GetPolys(), handle.GetPolyCount(), uvw,
                                     ls_on, handle.GetUVPointSel(), op, handle.GetMode(), c4d.UVCOMMAND_TRANSFORM, settings)
             ls_on.DeselectAll()
-			
+
     handle.SetUVWFromTextureView(uvw, True, True, True)    
     bodypaint.FreeActiveUVSet(handle)
     c4d.CallCommand(13324)
     c4d.StatusClear()
-	
+
 if __name__=='__main__':   
     main()
